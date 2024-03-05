@@ -35,9 +35,9 @@ public class StudentConroller {
         return ResponseEntity.ok(student);
     }
 
-    @PutMapping("/put")
-    public ResponseEntity<Student> editStudentInfo(@RequestBody Student student) {
-        Student foundStudent = studentService.updateStudent(student);
+    @PutMapping("/put{idU}")
+    public ResponseEntity<Student> editStudentInfo(@RequestBody Student student, @PathVariable Long idU) {
+        Student foundStudent = studentService.updateStudent(idU, student);
         if (foundStudent == null) {
             return ResponseEntity.status(BAD_REQUEST).build();
         }

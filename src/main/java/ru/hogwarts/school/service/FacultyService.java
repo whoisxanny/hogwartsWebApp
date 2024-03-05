@@ -27,9 +27,9 @@ public class FacultyService {
         throw new RuntimeException();
     }
 
-    public Faculty updateFaculty(Faculty faculty) {
-        if (facultyMap.containsKey(faculty.getId())) {
-            return facultyMap.put(faculty.getId(), faculty);
+    public Faculty updateFaculty(Long idU, Faculty faculty) {
+        if (facultyMap.containsKey(idU)) {
+            return facultyMap.put(idU, faculty);
         }
         throw new RuntimeException();
     }

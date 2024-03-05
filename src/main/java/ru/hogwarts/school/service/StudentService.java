@@ -28,9 +28,9 @@ public class StudentService {
         throw new RuntimeException();
     }
 
-    public Student updateStudent(Student student) {
-        if (studentMap.containsKey(student.getId())) {
-            studentMap.put(student.getId(), student);
+    public Student updateStudent(Long idU, Student student) {
+        if (studentMap.containsKey(idU)) {
+            studentMap.put(idU, student);
             return student;
         }
         throw new RuntimeException();

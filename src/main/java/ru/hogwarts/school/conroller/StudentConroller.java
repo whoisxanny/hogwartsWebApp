@@ -35,7 +35,7 @@ public class StudentConroller {
         return ResponseEntity.ok(student);
     }
 
-    @PutMapping("/put{idU}")
+    @PutMapping("/put")
     public ResponseEntity<Student> editStudentInfo(@RequestBody Student student) {
         Student foundStudent = studentService.updateStudent(student);
         if (foundStudent == null) {

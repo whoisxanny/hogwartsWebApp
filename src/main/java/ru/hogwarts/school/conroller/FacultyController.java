@@ -4,9 +4,7 @@ package ru.hogwarts.school.conroller;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
-import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.FacultyService;
-import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
 import java.util.Collections;
@@ -37,9 +35,9 @@ public class FacultyController {
         return ResponseEntity.ok(faculty);
     }
 
-    @PutMapping("/put{id}")
-    public ResponseEntity<Faculty> editStudentInfo(@RequestBody Faculty faculty, @RequestParam Long idU) {
-        Faculty foundStudent = facultyService.updateFaculty(idU, faculty);
+    @PutMapping("/put")
+    public ResponseEntity<Faculty> editStudentInfo(@RequestBody Faculty faculty) {
+        Faculty foundStudent = facultyService.updateFaculty(faculty);
         if (foundStudent == null) {
             return ResponseEntity.status(BAD_REQUEST).build();
         }

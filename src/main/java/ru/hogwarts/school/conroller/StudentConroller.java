@@ -36,15 +36,15 @@ public class StudentConroller {
     }
 
     @PutMapping("/put{idU}")
-    public ResponseEntity<Student> editStudentInfo(@RequestBody Student student, @PathVariable Long idU) {
-        Student foundStudent = studentService.updateStudent(idU, student);
+    public ResponseEntity<Student> editStudentInfo(@RequestBody Student student) {
+        Student foundStudent = studentService.updateStudent(student);
         if (foundStudent == null) {
             return ResponseEntity.status(BAD_REQUEST).build();
         }
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("{idD}")
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();

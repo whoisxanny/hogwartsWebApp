@@ -1,49 +1,40 @@
 package ru.hogwarts.school.service;
 
+import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Faculty;
+import ru.hogwarts.school.repositories.FacultyRepository;
 
 import java.util.*;
 
+
+@Service
 public class FacultyService {
 
+    private final FacultyRepository facultyRepository;
 
-    public Map<Long, Faculty> facultyMap = new HashMap<>();
-
-    public Long id = 0L;
+    public FacultyService(FacultyRepository facultyRepository) {
+        this.facultyRepository = facultyRepository;
+    }
 
     public Faculty createFaculty(Faculty faculty) {
-        if (!facultyMap.containsKey(faculty.getId())) {
-            faculty.setId(++id);
-            return facultyMap.put(faculty.getId(), faculty);
-        }
-        throw new RuntimeException();
+        return facultyRepository.save(faculty);
     }
 
     public Faculty getFaculty(Long idG) {
-        if (facultyMap.containsKey(idG)) {
-            return facultyMap.get(idG);
-        }
-
-        throw new RuntimeException();
+        return facultyRepository.findById(idG).get();
     }
 
-    public Faculty updateFaculty(Long idU, Faculty faculty) {
-        if (facultyMap.containsKey(idU)) {
-            return facultyMap.put(idU, faculty);
-        }
-        throw new RuntimeException();
+    public Faculty updateFaculty(Faculty faculty) {
+        return facultyRepository.save(faculty);
     }
 
-    public Faculty deleteFaculty(Long idD) {
-        if (facultyMap.containsKey(idD)) {
-            return facultyMap.remove(idD);
-        }
-        throw new RuntimeException();
+    public void deleteFaculty(Long idD) {
+        facultyRepository.deleteById(idD);
     }
 
     public Collection<Faculty> filteredByColor(String color) {
         List<Faculty> acceptables = new ArrayList<>();
-        for (Faculty faculty : facultyMap.values()) {
+        for (Faculty faculty : facultyRepository.findAll()) {
             if (faculty.equals(color, faculty.getColor())) {
                 acceptables.add(faculty);
             }

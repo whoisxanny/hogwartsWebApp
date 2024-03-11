@@ -2,6 +2,7 @@ package ru.hogwarts.school.service;
 
 import org.springframework.stereotype.Service;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.repositories.StudentRepository;
 
 import java.util.*;
 
@@ -9,43 +10,31 @@ import java.util.*;
 @Service
 public class StudentService {
 
-    public Map<Long, Student> studentMap = new HashMap<>();
-    public Long id = 0L;
+    private final StudentRepository studentRepository;
+
+    public StudentService(StudentRepository studentRepository) {
+        this.studentRepository = studentRepository;
+    }
 
     public Student createStudent(Student student) {
-        if (!studentMap.containsKey(student.getId())) {
-            student.setId(++id);
-            studentMap.put(student.getId(), student);
-            return student;
-        }
-        throw new RuntimeException();
+        return studentRepository.save(student);
     }
 
     public Student getStudent(Long idG) {
-        if (studentMap.containsKey(idG)) {
-            return studentMap.get(idG);
-        }
-        throw new RuntimeException();
+        return studentRepository.findById(idG).get();
     }
 
-    public Student updateStudent(Long idU, Student student) {
-        if (studentMap.containsKey(idU)) {
-            studentMap.put(idU, student);
-            return student;
-        }
-        throw new RuntimeException();
+    public Student updateStudent(Student student) {
+        return studentRepository.save(student);
     }
     
-    public Student deleteStudent(Long idD) {
-        if (studentMap.containsKey(idD)) {
-            return studentMap.remove(idD);
-        }
-        throw new RuntimeException();
+    public void deleteStudent(Long idD) {
+        studentRepository.deleteById(idD);
     }
 
     public Collection<Student> filteredByAge(int age) {
         List<Student> acceptables = new ArrayList<>();
-        for (Student student : studentMap.values()) {
+        for (Student student : studentRepository.findAll()) {
             if (student.getAge() == age) {
                 acceptables.add(student);
             }

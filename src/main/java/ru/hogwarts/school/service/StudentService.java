@@ -21,7 +21,7 @@ public class StudentService {
     }
 
     public Student getStudent(Long idG) {
-        return studentRepository.findById(idG).get();
+        return studentRepository.findById(idG).orElseThrow(RuntimeException::new);
     }
 
     public Student updateStudent(Student student) {

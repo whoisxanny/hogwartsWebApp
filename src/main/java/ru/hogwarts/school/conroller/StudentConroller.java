@@ -26,7 +26,7 @@ public class StudentConroller {
         return studentService.createStudent(student);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get{id}")
     public ResponseEntity getStudentInfo(@PathVariable  Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {

@@ -1,10 +1,8 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 
@@ -12,25 +10,29 @@ import java.util.Objects;
 public class Faculty {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private Long id;
+    private Long facultyId;
     private String name;
     private String color;
 
+    @OneToMany(mappedBy = "faculty")
+    private Collection<Student> students;
+
     public Faculty() {
+
     }
 
-    public Faculty(Long id, String name, String color) {
-        this.id = id;
+    public Faculty(Long facultyId, String name, String color) {
+        this.facultyId = facultyId;
         this.name = name;
         this.color = color;
     }
 
     public Long getId() {
-        return id;
+        return facultyId;
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    public void setId(Long facultyId) {
+        this.facultyId = facultyId;
     }
 
     public String getName() {
@@ -53,18 +55,18 @@ public class Faculty {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return Objects.equals(id, faculty.id) && Objects.equals(name, faculty.name) && Objects.equals(this.color, faculty.color);
+        return Objects.equals(facultyId, faculty.facultyId) && Objects.equals(name, faculty.name) && Objects.equals(this.color, faculty.color);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, name, color);
+        return Objects.hash(facultyId, name, color);
     }
 
     @Override
     public String toString() {
         return "Faculty{" +
-                "id=" + id +
+                "facultyId=" + facultyId +
                 ", name='" + name + '\'' +
                 ", color='" + color + '\'' +
                 '}';

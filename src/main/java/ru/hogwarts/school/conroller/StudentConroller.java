@@ -3,6 +3,7 @@ package ru.hogwarts.school.conroller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
@@ -50,4 +51,23 @@ public class StudentConroller {
         return ResponseEntity.ok().build();
     }
 
+    @GetMapping("/get")
+    public ResponseEntity<Collection<Student>> findStudentsByAge(@RequestParam(required = false) Integer min,
+                                                                 @RequestParam(required = false) Integer max) {
+        if (min != null && max != null) {
+            return ResponseEntity.ok(studentService.findStudentBetweenAges(min, max));
+        } else if (min != null || max != null) {
+            return ResponseEntity.ok(studentService.filteredByAge(min));
+        } else {
+            return ResponseEntity.ok(studentService.findAll());
+        }
+    }
+
+    @GetMapping("/getfaculty")
+    public ResponseEntity<Faculty> findFacultyByStudentId(@RequestParam Integer studentId) {
+        if (studentId != null) {
+            return ResponseEntity.ok(studentService.getStudentFacultyByStudentId(studentId));
+        }
+        return ResponseEntity.status(BAD_REQUEST).build();
+    }
 }

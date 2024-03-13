@@ -26,7 +26,7 @@ public class StudentConroller {
         return studentService.createStudent(student);
     }
 
-    @GetMapping("/get{id}")
+    @GetMapping("/{id}")
     public ResponseEntity getStudentInfo(@PathVariable  Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
@@ -44,7 +44,7 @@ public class StudentConroller {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("{idD}")
+    @DeleteMapping("/{idD}")
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();

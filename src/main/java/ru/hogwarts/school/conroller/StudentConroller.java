@@ -27,7 +27,7 @@ public class StudentConroller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getStudentInfo(@PathVariable  Long id) {
+    public ResponseEntity getStudentInfo(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -50,11 +50,4 @@ public class StudentConroller {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping
-    public ResponseEntity<Collection<Student>> findStudentsByAge(@RequestParam(required = false) int age) {
-        if (age > 0) {
-            return ResponseEntity.ok(studentService.filteredByAge(age));
-        }
-        return ResponseEntity.ok(Collections.emptyList());
-    }
 }

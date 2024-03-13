@@ -41,4 +41,8 @@ public class StudentService {
         }
         return acceptables;
     }
+
+    public Collection<Student> findAll() {
+        return studentRepository.findAll();
+    }
 }

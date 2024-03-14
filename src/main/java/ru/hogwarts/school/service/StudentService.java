@@ -50,7 +50,5 @@ public class StudentService {
         return studentRepository.findByAgeBetween(min, max);
     }
 
-    public Faculty getStudentFacultyByStudentId(Integer studentId){
-        return studentRepository.findFacultyByStudentId(studentId);
-    }
+
 }

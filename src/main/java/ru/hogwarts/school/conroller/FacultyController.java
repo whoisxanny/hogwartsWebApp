@@ -52,8 +52,8 @@ public class FacultyController {
     }
 
     @GetMapping("/get")
-    public ResponseEntity<Faculty> findFaculties(@RequestParam(required = false) String color,
-                                                 @RequestParam(required = false) String name) {
+    public ResponseEntity<Collection<Faculty>> findFaculties(@RequestParam(required = false) String color,
+                                                             @RequestParam(required = false) String name) {
         if ((color != null && !color.isBlank()) || (name != null && !name.isBlank())) {
             return ResponseEntity.ok(facultyService.findByColorOrName(color, name));
         } else if (color != null && name == null) {
@@ -63,8 +63,10 @@ public class FacultyController {
         }
     }
 
-    @GetMapping("/gatstudents")
-    public ResponseEntity<Collection<Student>> findStudentsInfaculty(@RequestParam Integer id) {
-        return ResponseEntity.ok(facultyService.findStudentsInFaculty(id));
+
+    @GetMapping("/getfacultybycolororname")
+    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String name,
+                                                                        @RequestParam(required = false) String color) {
+        return ResponseEntity.ok(facultyService.findByColorOrName(name, color));
     }
 }

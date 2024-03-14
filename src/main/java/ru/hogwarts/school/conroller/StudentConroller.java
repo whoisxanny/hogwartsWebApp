@@ -63,11 +63,4 @@ public class StudentConroller {
         }
     }
 
-    @GetMapping("/getfaculty")
-    public ResponseEntity<Faculty> findFacultyByStudentId(@RequestParam Integer studentId) {
-        if (studentId != null) {
-            return ResponseEntity.ok(studentService.getStudentFacultyByStudentId(studentId));
-        }
-        return ResponseEntity.status(BAD_REQUEST).build();
-    }
 }

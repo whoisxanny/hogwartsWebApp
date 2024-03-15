@@ -8,9 +8,10 @@ import java.util.Objects;
 
 
 @Entity
+@Table
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long facultyId;
     private String name;
     private String color;

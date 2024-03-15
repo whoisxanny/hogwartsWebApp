@@ -43,7 +43,7 @@ public class FacultyService {
     }
 
     public Collection<Student> findStudentsInFaculty(Long id) {
-        return facultyRepository.findByFacultyId(id).getStudents();
+        return facultyRepository.findById(id).get().getStudents();
     }
 
 

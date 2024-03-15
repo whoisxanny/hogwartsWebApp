@@ -8,7 +8,6 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -28,7 +27,7 @@ public class StudentConroller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getStudentInfo(@PathVariable Long id) {
+    public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -56,11 +55,16 @@ public class StudentConroller {
                                                                  @RequestParam(required = false) Integer max) {
         if (min != null && max != null) {
             return ResponseEntity.ok(studentService.findStudentBetweenAges(min, max));
-        } else if (min != null || max != null) {
+        } else if (min != null) {
             return ResponseEntity.ok(studentService.filteredByAge(min));
         } else {
             return ResponseEntity.ok(studentService.findAll());
         }
+    }
+
+    @GetMapping("/getfaculty")
+    public ResponseEntity<Faculty> findStudentFaculty(@RequestParam Integer id) {
+        return ResponseEntity.ok(studentService.getStudentFaculty(id));
     }
 
 }

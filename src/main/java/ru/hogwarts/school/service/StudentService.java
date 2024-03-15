@@ -33,10 +33,10 @@ public class StudentService {
         studentRepository.deleteById(idD);
     }
 
-    public Collection<Student> filteredByAge(int age) {
+    public Collection<Student> filteredByAge(Integer age) {
         List<Student> acceptables = new ArrayList<>();
         for (Student student : studentRepository.findAll()) {
-            if (student.getAge() == age) {
+            if (student.getAge() >= age) {
                 acceptables.add(student);
             }
         }
@@ -48,6 +48,10 @@ public class StudentService {
     }
     public Collection<Student> findStudentBetweenAges(int min, int max) {
         return studentRepository.findByAgeBetween(min, max);
+    }
+
+    public Faculty getStudentFaculty(Integer id) {
+        return studentRepository.findById(id).getFaculty();
     }
 
 

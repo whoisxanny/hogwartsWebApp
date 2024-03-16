@@ -3,11 +3,11 @@ package ru.hogwarts.school.conroller;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
-import java.util.Collections;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
@@ -27,7 +27,7 @@ public class StudentConroller {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity getStudentInfo(@PathVariable Long id) {
+    public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
             return ResponseEntity.notFound().build();
@@ -48,6 +48,23 @@ public class StudentConroller {
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();
+    }
+
+    @GetMapping("/get")
+    public ResponseEntity<Collection<Student>> findStudentsByAge(@RequestParam(required = false) Integer min,
+                                                                 @RequestParam(required = false) Integer max) {
+        if (min != null && max != null) {
+            return ResponseEntity.ok(studentService.findStudentBetweenAges(min, max));
+        } else if (min != null) {
+            return ResponseEntity.ok(studentService.filteredByAge(min));
+        } else {
+            return ResponseEntity.ok(studentService.findAll());
+        }
+    }
+
+    @GetMapping("/getfaculty")
+    public ResponseEntity<Faculty> findStudentFaculty(@RequestParam Integer id) {
+        return ResponseEntity.ok(studentService.getStudentFaculty(id));
     }
 
 }

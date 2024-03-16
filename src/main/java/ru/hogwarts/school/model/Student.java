@@ -1,9 +1,6 @@
 package ru.hogwarts.school.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 import java.util.Objects;
 
@@ -11,10 +8,14 @@ import java.util.Objects;
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
+
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "facultyId")
+    private Faculty faculty;
 
     public Student() {
     }
@@ -23,6 +24,14 @@ public class Student {
         this.id = id;
         this.name = name;
         this.age = age;
+    }
+
+    public void setFaculty(Faculty faculty) {
+        this.faculty = faculty;
+    }
+
+    public Faculty getFaculty() {
+        return faculty;
     }
 
     public Long getId() {
@@ -48,6 +57,8 @@ public class Student {
     public void setAge(Integer age) {
         this.age = age;
     }
+
+
 
     @Override
     public boolean equals(Object o) {

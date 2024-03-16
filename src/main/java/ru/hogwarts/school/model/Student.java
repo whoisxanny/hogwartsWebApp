@@ -13,6 +13,12 @@ public class Student {
     private String name;
     private Integer age;
 
+    // cascade = CascadeType.ALL
+    //
+    //cascade = CascadeType.PERSIST
+    //
+    //а в чём здесь разница? если и то создает объект, когда мы создаём другой объект. ТО бишь я создавал новый факультет , когда создавал студента. Персист не работал а all работал
+
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "facultyId")
     private Faculty faculty;

@@ -65,9 +65,9 @@ public class FacultyController {
 
 
     @GetMapping("/getfacultybycolororname")
-    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String name,
-                                                                        @RequestParam(required = false) String color) {
-        return ResponseEntity.ok(facultyService.findByColorOrName(name, color));
+    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String color,
+                                                                        @RequestParam(required = false) String name) {
+        return ResponseEntity.ok(facultyService.findByColorOrName(color, name));
     }
 
     @GetMapping("/getstudents")

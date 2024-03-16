@@ -1,12 +1,16 @@
 package ru.hogwarts.school.conroller;
 
 
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
+import java.io.IOException;
 import java.util.Collection;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
@@ -16,9 +20,11 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 public class StudentConroller {
 
     private final StudentService studentService;
+    private final AvatarService avatarService;
 
-    public StudentConroller(StudentService studentService) {
+    public StudentConroller(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
+        this.avatarService = avatarService;
     }
 
     @PostMapping("/add")

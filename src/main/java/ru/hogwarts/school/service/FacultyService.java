@@ -6,6 +6,7 @@ import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
 
 import java.util.Collection;
+import java.util.List;
 
 
 @Service
@@ -32,6 +33,7 @@ public class FacultyService {
     public void deleteFaculty(Long idD) {
         facultyRepository.deleteById(idD);
     }
+
 
 
     public Collection<Faculty> filteredByColor(String color) {

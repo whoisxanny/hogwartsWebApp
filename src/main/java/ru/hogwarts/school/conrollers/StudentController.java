@@ -1,33 +1,30 @@
-package ru.hogwarts.school.conroller;
+package ru.hogwarts.school.conrollers;
 
 
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.multipart.MultipartFile;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
-import java.io.IOException;
 import java.util.Collection;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/student")
-public class StudentConroller {
+public class StudentController {
 
     private final StudentService studentService;
     private final AvatarService avatarService;
 
-    public StudentConroller(StudentService studentService, AvatarService avatarService) {
+    public StudentController(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
         this.avatarService = avatarService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
@@ -50,7 +47,7 @@ public class StudentConroller {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("/{idD}")
+    @DeleteMapping("/delete/{idD}")
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();

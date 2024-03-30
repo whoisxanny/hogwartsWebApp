@@ -1,4 +1,4 @@
-package ru.hogwarts.school.conroller;
+package ru.hogwarts.school.conrollers;
 
 
 import org.springframework.http.ResponseEntity;
@@ -22,12 +22,12 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @PostMapping("/add")
+    @PostMapping
     public Faculty createStudent(@RequestBody Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
 
-    @GetMapping("{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
         Faculty faculty = facultyService.getFaculty(id);
         if (faculty == null) {
@@ -45,7 +45,7 @@ public class FacultyController {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("{id}")
+    @DeleteMapping("/delete/{idD}")
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         facultyService.deleteFaculty(idD);
         return ResponseEntity.ok().build();

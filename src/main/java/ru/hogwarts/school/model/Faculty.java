@@ -11,7 +11,7 @@ import java.util.Objects;
 @Table
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long facultyId;
     private String name;
     private String color;
@@ -63,17 +63,21 @@ public class Faculty {
         this.color = color;
     }
 
-    public boolean equals(Object o, String color) {
+    @Override
+    public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Faculty faculty = (Faculty) o;
-        return Objects.equals(facultyId, faculty.facultyId) && Objects.equals(name, faculty.name) && Objects.equals(this.color, faculty.color);
+        return Objects.equals(facultyId, faculty.facultyId) &&
+                Objects.equals(name, faculty.name) &&
+                Objects.equals(color, faculty.color);
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(facultyId, name, color);
     }
+
 
     @Override
     public String toString() {

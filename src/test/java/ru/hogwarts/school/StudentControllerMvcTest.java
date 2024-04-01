@@ -76,6 +76,7 @@ public class StudentControllerMvcTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.age").value(age));
     }
@@ -92,13 +93,13 @@ public class StudentControllerMvcTest {
         studentOb.put("name", name);
         studentOb.put("age", age);
 
-        when(studentRepository.save(any(Student.class))).thenReturn(student);
         when(studentRepository.findById(eq(id))).thenReturn(Optional.of(student));
 
         mockMvc.perform(MockMvcRequestBuilders
                         .get("/student/" + id)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.age").value(age));
 
@@ -131,6 +132,7 @@ public class StudentControllerMvcTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .accept(MediaType.APPLICATION_JSON))
                 .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.age").value(age));
     }

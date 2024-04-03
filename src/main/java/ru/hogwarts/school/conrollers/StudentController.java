@@ -16,20 +16,19 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 @RequestMapping("/student")
 public class StudentController {
 
+
     private final StudentService studentService;
-    private final AvatarService avatarService;
 
     public StudentController(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
-        this.avatarService = avatarService;
     }
 
-    @PostMapping
+    @PostMapping("/add")
     public Student createStudent(@RequestBody Student student) {
         return studentService.createStudent(student);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
@@ -47,7 +46,23 @@ public class StudentController {
         return ResponseEntity.ok(foundStudent);
     }
 
+    @GetMapping("/get-sum-students")
+    public ResponseEntity<Integer> getAmoutOfStudents(){
+        return ResponseEntity.ok(studentService.getAmountOfStudents());
+    }
+
+    @GetMapping("/get-average")
+    public ResponseEntity<Integer> getAverage() {
+        return ResponseEntity.ok(studentService.getAverageAgeFromStudents());
+    }
+
+    @GetMapping("/last-five-students")
+    public ResponseEntity<Collection<Student>> getLastFiveStudents() {
+        return ResponseEntity.ok(studentService.findLastFiveStudents());
+    }
+
     @DeleteMapping("/delete/{idD}")
+
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();
@@ -65,9 +80,9 @@ public class StudentController {
         }
     }
 
-    @GetMapping("/getfaculty")
-    public ResponseEntity<Faculty> findStudentFaculty(@RequestParam Integer id) {
-        return ResponseEntity.ok(studentService.getStudentFaculty(id));
+    @GetMapping("/get/faculty/{idF}")
+    public ResponseEntity<Faculty> findStudentFaculty(@PathVariable Integer idF) {
+        return ResponseEntity.ok(studentService.getStudentFaculty(idF));
     }
 
 }

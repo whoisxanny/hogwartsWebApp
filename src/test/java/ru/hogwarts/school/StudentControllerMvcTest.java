@@ -12,6 +12,7 @@ import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import ru.hogwarts.school.conrollers.FacultyController;
+import ru.hogwarts.school.conrollers.StudentController;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
 import ru.hogwarts.school.repositories.FacultyRepository;
@@ -50,7 +51,7 @@ public class StudentControllerMvcTest {
 
 
     @InjectMocks
-    private FacultyController facultyController;
+    private StudentController studentController;
 
 
     @BeforeEach
@@ -68,6 +69,7 @@ public class StudentControllerMvcTest {
         studentOb.put("name", name);
         studentOb.put("age", age);
 
+
         when(studentRepository.save(any(Student.class))).thenReturn(student);
 
         mockMvc.perform(MockMvcRequestBuilders
@@ -79,6 +81,7 @@ public class StudentControllerMvcTest {
                 .andExpect(jsonPath("$.id").value(id))
                 .andExpect(jsonPath("$.name").value(name))
                 .andExpect(jsonPath("$.age").value(age));
+
     }
 
     @Test

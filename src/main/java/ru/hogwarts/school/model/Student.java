@@ -8,18 +8,13 @@ import java.util.Objects;
 @Entity
 public class Student {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
     private Integer age;
 
-    // cascade = CascadeType.ALL
-    //
-    //cascade = CascadeType.PERSIST
-    //
-    //а в чём здесь разница? если и то создает объект, когда мы создаём другой объект. ТО бишь я создавал новый факультет , когда создавал студента. Персист не работал а all работал
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "facultyId")
     private Faculty faculty;
 
@@ -44,9 +39,6 @@ public class Student {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

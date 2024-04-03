@@ -22,14 +22,14 @@ public class FacultyController {
         this.facultyService = facultyService;
     }
 
-    @PostMapping
-    public Faculty createStudent(@RequestBody Faculty faculty) {
+    @PostMapping("/add")
+    public Faculty createFaculty(@RequestBody Faculty faculty) {
         return facultyService.createFaculty(faculty);
     }
 
-    @GetMapping("/get/{id}")
-    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long id) {
-        Faculty faculty = facultyService.getFaculty(id);
+    @GetMapping("/get/{idG}")
+    public ResponseEntity<Faculty> getFacultyInfo(@PathVariable Long idG) {
+        Faculty faculty = facultyService.getFaculty(idG);
         if (faculty == null) {
             return ResponseEntity.notFound().build();
         }
@@ -38,11 +38,11 @@ public class FacultyController {
 
     @PutMapping("/put")
     public ResponseEntity<Faculty> editStudentInfo(@RequestBody Faculty faculty) {
-        Faculty foundStudent = facultyService.updateFaculty(faculty);
-        if (foundStudent == null) {
+        Faculty foundFaculty = facultyService.updateFaculty(faculty);
+        if (foundFaculty == null) {
             return ResponseEntity.status(BAD_REQUEST).build();
         }
-        return ResponseEntity.ok(foundStudent);
+        return ResponseEntity.ok(foundFaculty);
     }
 
     @DeleteMapping("/delete/{idD}")
@@ -64,14 +64,14 @@ public class FacultyController {
     }
 
 
-    @GetMapping("/getfacultybycolororname")
-    public ResponseEntity<Collection<Faculty>> findFacultyByNameOrColor(@RequestParam(required = false) String color,
-                                                                        @RequestParam(required = false) String name) {
-        return ResponseEntity.ok(facultyService.findByColorOrName(color, name));
-    }
 
-    @GetMapping("/getstudents")
+    @GetMapping("/get/students/{id}")
     public ResponseEntity<Collection<Student>> findStudentsInFaculty(@RequestParam Long id) {
         return ResponseEntity.ok(facultyService.findStudentsInFaculty(id));
+    }
+
+    @GetMapping("/get/all")
+    public ResponseEntity<Collection<Faculty>> findAllFaculties() {
+        return ResponseEntity.ok(facultyService.findAllFaculties());
     }
 }

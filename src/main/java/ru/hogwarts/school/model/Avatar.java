@@ -86,4 +86,33 @@ public class Avatar {
         result = 31 * result + Arrays.hashCode(avatarsData);
         return result;
     }
+
+
+
+//import org.hibernate.Session;
+//import org.hibernate.SessionFactory;
+//import org.hibernate.Transaction;
+//import org.hibernate.cfg.Configuration;
+//
+//    public class Main {
+//        public static void main(String[] args) {
+//            Configuration configuration = new Configuration().configure();
+//            SessionFactory sessionFactory = configuration.buildSessionFactory();
+//
+//            Session session = sessionFactory.openSession();
+//            Transaction transaction = session.beginTransaction();
+//
+//            // Создание нового объекта Person
+//            Person person = new Person();
+//            person.setName("John Doe");
+//            person.setAge(30);
+//
+//            // Сохранение объекта в базе данных
+//            session.save(person);
+//
+//            transaction.commit();
+//            session.close();
+//            sessionFactory.close();
+//        }
+//    }
 }

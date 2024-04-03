@@ -11,7 +11,7 @@ import java.util.Objects;
 @Table
 public class Faculty {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long facultyId;
     private String name;
     private String color;
@@ -43,9 +43,6 @@ public class Faculty {
     }
 
 
-    public void setFacultyId(Long facultyId) {
-        this.facultyId = facultyId;
-    }
 
     public String getName() {
         return name;

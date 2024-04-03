@@ -1,5 +1,6 @@
 package ru.hogwarts.school;
 
+
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.assertj.core.api.Assertions;
@@ -23,6 +24,7 @@ import java.util.stream.Collectors;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.assertj.core.api.Assertions.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class StudentControllerTest {
@@ -60,6 +62,7 @@ public class StudentControllerTest {
         ResponseEntity<String> response = restTemplate.postForEntity("/student", student, String.class);
 
         assertEquals(HttpStatus.OK,response.getStatusCode());
+
         Student createdStudent = mapper.readValue(response.getBody(), Student.class);
         student.setId(createdStudent.getId());
         JSONAssert.assertEquals(mapper.writeValueAsString(student), response.getBody(), true);

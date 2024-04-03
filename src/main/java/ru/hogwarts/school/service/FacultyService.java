@@ -48,6 +48,10 @@ public class FacultyService {
         return facultyRepository.findById(id).orElseThrow(RuntimeException::new).getStudents();
     }
 
+    public Collection<Faculty> findAllFaculties() {
+        return facultyRepository.findAll();
+    }
+
 
 
 }

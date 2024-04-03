@@ -43,11 +43,23 @@ public class StudentService {
         return acceptables;
     }
 
+    public Integer getAmountOfStudents() {
+        return studentRepository.getAmountOfStudents();
+    }
+
+    public Integer getAverageAgeFromStudents() {
+        return studentRepository.getAverageAgeOfStudents();
+    }
+
     public Collection<Student> findAll() {
         return studentRepository.findAll();
     }
     public Collection<Student> findStudentBetweenAges(int min, int max) {
         return studentRepository.findStudentBetweenAge(min, max);
+    }
+
+    public Collection<Student> findLastFiveStudents() {
+        return studentRepository.getLastFiveStudents();
     }
 
     public Faculty getStudentFaculty(Integer id) {

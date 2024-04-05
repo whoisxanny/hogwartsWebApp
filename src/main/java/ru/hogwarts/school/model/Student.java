@@ -13,7 +13,8 @@ public class Student {
     private String name;
     private Integer age;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "facultyId")
     private Faculty faculty;
 
@@ -38,9 +39,6 @@ public class Student {
         return id;
     }
 
-    public void setId(Long id) {
-        this.id = id;
-    }
 
     public String getName() {
         return name;

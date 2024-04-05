@@ -1,10 +1,11 @@
-package ru.hogwarts.school.conroller;
+package ru.hogwarts.school.conrollers;
 
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import ru.hogwarts.school.model.Faculty;
 import ru.hogwarts.school.model.Student;
+import ru.hogwarts.school.service.AvatarService;
 import ru.hogwarts.school.service.StudentService;
 
 import java.util.Collection;
@@ -13,11 +14,12 @@ import static org.springframework.http.HttpStatus.BAD_REQUEST;
 
 @RestController
 @RequestMapping("/student")
-public class StudentConroller {
+public class StudentController {
+
 
     private final StudentService studentService;
 
-    public StudentConroller(StudentService studentService) {
+    public StudentController(StudentService studentService, AvatarService avatarService) {
         this.studentService = studentService;
     }
 
@@ -26,7 +28,7 @@ public class StudentConroller {
         return studentService.createStudent(student);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/get/{id}")
     public ResponseEntity<Student> getStudentInfo(@PathVariable Long id) {
         Student student = studentService.getStudent(id);
         if (student == null) {
@@ -44,7 +46,23 @@ public class StudentConroller {
         return ResponseEntity.ok(foundStudent);
     }
 
-    @DeleteMapping("/{idD}")
+    @GetMapping("/get-sum-students")
+    public ResponseEntity<Integer> getAmoutOfStudents(){
+        return ResponseEntity.ok(studentService.getAmountOfStudents());
+    }
+
+    @GetMapping("/get-average")
+    public ResponseEntity<Double> getAverage() {
+        return ResponseEntity.ok(studentService.getAverageAgeFromStudents());
+    }
+
+    @GetMapping("/last-five-students")
+    public ResponseEntity<Collection<Student>> getLastFiveStudents() {
+        return ResponseEntity.ok(studentService.findLastFiveStudents());
+    }
+
+    @DeleteMapping("/delete/{idD}")
+
     public ResponseEntity<Void> deleteStudentInfo(@PathVariable Long idD) {
         studentService.deleteStudent(idD);
         return ResponseEntity.ok().build();
@@ -62,9 +80,9 @@ public class StudentConroller {
         }
     }
 
-    @GetMapping("/getfaculty")
-    public ResponseEntity<Faculty> findStudentFaculty(@RequestParam Integer id) {
-        return ResponseEntity.ok(studentService.getStudentFaculty(id));
+    @GetMapping("/get/faculty/{idF}")
+    public ResponseEntity<Faculty> findStudentFaculty(@PathVariable Integer idF) {
+        return ResponseEntity.ok(studentService.getStudentFaculty(idF));
     }
 
 }

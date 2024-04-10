@@ -1,19 +1,22 @@
-CREATE TABLE Author(
-    id INTEGER PRIMARY KEY;
-    name TEXT;
-    birth_date DATE;
+CREATE TABLE Human(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    age INTEGER,
+    lisence BOOLEAN;
 )
 
-CREATE TABLE MANGA(
-    id INTEGER PRIMARY KEY;
-    name TEXT;
-    published_year DATE;
-    rating NUMERIC(10,2);
+CREATE TABLE CAR(
+    id INTEGER PRIMARY KEY,
+    name TEXT,
+    model TEXT,
+    brand TEXT,
+    price NUMERIC(5,2);
 )
 
 CREATE TABLE Manga_by_Authors(
-    author_id INTEGER,
-    manga_id INTEGER,
-    FOREIGN KEY (author_id) REFERENCES Author(id),
-    FOREIGN KEY (manga_id) REFERENCES Manga(id)
+    human_id INTEGER,
+    car_id INTEGER,
+    PRIMARY KET (human_id, car_id),
+    FOREIGN KEY (human_id) REFERENCES Human(id),
+    FOREIGN KEY (car_id) REFERENCES Car(id);
 )

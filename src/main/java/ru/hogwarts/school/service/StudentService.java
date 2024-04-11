@@ -58,6 +58,10 @@ public class StudentService {
         return studentRepository.findStudentBetweenAge(min, max);
     }
 
+    public Collection<Student> getStudentsByName(String name) {
+        return studentRepository.findByName(name);
+    }
+
     public Collection<Student> findLastFiveStudents() {
         return studentRepository.getLastFiveStudents();
     }

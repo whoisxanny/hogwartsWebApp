@@ -28,4 +28,7 @@ public interface StudentRepository extends JpaRepository<Student,Long> {
     List<Student> getLastFiveStudents();
 
     Student findById(Integer id);
+
+    @Query(value = "SELECT * FROM STUDENT NAME LIKE ':name%'",nativeQuery = true)
+    List<Student> findByName(@Param("name") String name);
 }

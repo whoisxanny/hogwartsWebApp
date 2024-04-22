@@ -47,7 +47,7 @@ public class StudentController {
     }
 
     @GetMapping("/get-sum-students")
-    public ResponseEntity<Integer> getAmoutOfStudents(){
+    public ResponseEntity<Integer> getAmoutOfStudents() {
         return ResponseEntity.ok(studentService.getAmountOfStudents());
     }
 
@@ -85,4 +85,8 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getStudentFaculty(idF));
     }
 
+    @GetMapping("/get-by-name/{name}")
+    public ResponseEntity<Collection<Student>> getStudentsByName(@PathVariable String name) {
+        return ResponseEntity.ok(studentService.getStudentsByName(name));
+    }
 }

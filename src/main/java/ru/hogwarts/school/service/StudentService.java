@@ -107,6 +107,12 @@ public class StudentService {
                 .reduce(0, (a, b) -> a + b );
 
         return sum;
+
+
+//        long sum = LongStream.rangeClosed(1, 1_000_000)
+//                .parallel() //
+//                .sum();
+//        return sum;
     }
 
 

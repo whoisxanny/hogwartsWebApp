@@ -89,4 +89,21 @@ public class StudentController {
     public ResponseEntity<Collection<Student>> getStudentsByName(@PathVariable String name) {
         return ResponseEntity.ok(studentService.getStudentsByName(name));
     }
+
+    @GetMapping("/get-students-filtered-by-first-letter/{letter}")
+    public ResponseEntity<Collection<Student>> getStundentsWhoseNameStartsWithLetter(@PathVariable("letter") String letter){
+        return ResponseEntity.ok(studentService.getStundentsWhoseNameStartsWith(letter));
+    }
+
+    @GetMapping("/get-average-age-by-stream")
+    public ResponseEntity<Double> getAverageByStream() {
+        return ResponseEntity.ok(studentService.getAverageAgeOfStudentByStream());
+    }
+
+    @GetMapping("/get-integer-from-formula")
+    public ResponseEntity<Integer> getIntegerByFormula() {
+        return ResponseEntity.ok(studentService.getInteger());
+    }
+
+
 }

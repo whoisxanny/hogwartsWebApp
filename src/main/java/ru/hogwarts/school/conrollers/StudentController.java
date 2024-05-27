@@ -11,6 +11,7 @@ import ru.hogwarts.school.service.StudentService;
 import java.util.Collection;
 
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/student")
@@ -91,7 +92,7 @@ public class StudentController {
     }
 
     @GetMapping("/get-students-filtered-by-first-letter/{letter}")
-    public ResponseEntity<Collection<Student>> getStundentsWhoseNameStartsWithLetter(@PathVariable("letter") String letter){
+    public ResponseEntity<Collection<Student>> getStundentsWhoseNameStartsWithLetter(@PathVariable("letter") String letter) {
         return ResponseEntity.ok(studentService.getStundentsWhoseNameStartsWith(letter));
     }
 
@@ -105,5 +106,21 @@ public class StudentController {
         return ResponseEntity.ok(studentService.getInteger());
     }
 
+    @GetMapping("/students/print-parallel")
+    public ResponseEntity<String> printStudentParallel() {
+        return ResponseEntity.ok(studentService.printStudentsParallely());
 
+    }
+
+    @GetMapping("/students/print-synchronized")
+    public ResponseEntity<String> printStudentParallelSyn() {
+        return ResponseEntity.ok(studentService.printStudentsParallely2());
+
+    }
+
+    @GetMapping("/student/parallel-exp")
+    public String printExp() {
+        studentService.printStudentsParallely3();
+        return "Ahh!";
+    }
 }

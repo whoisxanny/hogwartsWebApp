@@ -117,6 +117,77 @@ public class StudentService {
 
 
 
+    public String printStudentsParallely() {
+
+        System.out.println(studentRepository.findById(1));
+        System.out.println(studentRepository.findById(2));
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(3));
+            System.out.println(studentRepository.findById(4));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(5));
+            System.out.println(studentRepository.findById(6));
+        }).start();
+
+        return "Students were printed";
+
+    }
+
+    public synchronized String printStudentsParallely2() {
+
+        System.out.println(studentRepository.findById(1));
+        System.out.println(studentRepository.findById(2));
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(3));
+            System.out.println(studentRepository.findById(4));
+        }).start();
+
+        new Thread(() -> {
+            System.out.println(studentRepository.findById(5));
+            System.out.println(studentRepository.findById(6));
+        }).start();
+
+        return "Students were printed";
+
+    }
+
+    public String printStudentsParallely3() {
+        printStudent(1L);
+        printStudent(2L);
+
+        new Thread(() -> {
+            printStudent(3L);
+            printStudent(4L);
+        }).start();
+
+        new Thread(() -> {
+            printStudent(5L);
+            printStudent(6L);
+        }).start();
+
+        return "All's done";
+
+    }
+
+    public void printStudent(Long id) {
+        System.out.println(studentRepository.findById(id));
+        int count = 0;
+
+        synchronized (Object.class) {
+            System.out.println("Count " + count);
+        }
+
+        count++;
+
+    }
+
+
+
+
 
 
 }

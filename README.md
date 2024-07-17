@@ -1,7 +1,74 @@
-Пет-проект по реализации бекэнд части для школы волшебства Хогвартс. 4 факультета и студенты в каждом. Папки разделяются по контроллер/сервису (не по фичам). В проекте присутствует контроллер, сервисы и их имплементации, сущности и репозиторий. Тестирования JUnit и мокированное тестирование. 
+Hogwarts Web App
+Инструменты и технологии
+Java: Язык программирования, используемый для разработки основной логики приложения.
+Spring Boot: Фреймворк для создания самостоятельных, производительных и легко настраиваемых приложений на Java.
+H2 Database: Встроенная база данных для разработки и тестирования.
+PostgreSQL: Реляционная база данных для использования в производственной среде.
+JUnit: Фреймворк для модульного тестирования Java-приложений.
+Spring Mockito: 
+Maven: Инструмент для управления зависимостями и сборкой проекта.
 
-Пет - проект написанный на Java, с использованием Spring Framework, Spring Boot для создания проекта и привязки локальной базы данных. Spring Data, в частности работа через pgAdmin4 для установаления связи с БД, ORM - Hibernate. Репозиторий по JPA. Архитектурный стиль - Restful Api.
+Описание проекта
+Hogwarts Web App — это веб-приложение, разработанное для управления делами и планированием задач студентов и преподавателей школы Хогвартс. Оно предоставляет удобный интерфейс для создания, редактирования и отслеживания задач.
+Целевая аудитория: Студенты и преподаватели школы Хогвартс, а также все, кто интересуется планированием и управлением задачами.
+Цель: Обеспечить удобный инструмент для планирования задач и повышения продуктивности пользователей.
 
-Pet project to implement the backend part for Hogwarts School of Wizardry. 4 faculties and students in each. Folders are separated by controller/service (not by feature). The project contains a controller, services and their implementations, entities and a repository. JUnit testing and mock testing. 
+Инструкция по установке
+Требования
+Java 17
+Maven
+PostgreSQL
+Установка
+Клонируйте репозиторий:
 
-Pet is a project written in Java, using the Spring Framework, Spring Boot to create a project and bind a local database. Spring Data, in particular working through pgAdmin4 to establish a connection with the database, ORM - Hibernate. JPA repository. Architectural style - Restful Api.
+sh
+Копировать код
+git clone https://github.com/whoisxanny/hogwartsWebApp.git
+cd hogwartsWebApp
+Настройте базу данных:
+
+Создайте базу данных PostgreSQL и настройте параметры подключения в application.properties:
+
+properties
+Копировать код
+spring.datasource.url=jdbc:postgresql://localhost:5432/hogwarts
+spring.datasource.username=yourUsername
+spring.datasource.password=yourPassword
+Установите зависимости и соберите проект:
+
+sh
+Копировать код
+mvn clean install
+Запустите приложение:
+
+sh
+Копировать код
+mvn spring-boot:run
+Инструкция для разработчиков
+Клонируйте репозиторий и перейдите в папку проекта:
+
+sh
+Копировать код
+git clone https://github.com/whoisxanny/hogwartsWebApp.git
+cd hogwartsWebApp
+Установите зависимости и соберите проект:
+
+sh
+Копировать код
+mvn clean install
+Настройка среды разработки:
+
+Импортируйте проект в вашу IDE как Maven проект.
+Убедитесь, что у вас настроена Java 17 в вашей IDE.
+Создайте конфигурацию запуска для Spring Boot.
+Тестирование:
+
+Запустите тесты с использованием JUnit:
+
+sh
+Копировать код
+mvn test
+Ссылки на документацию, поддержку и контакты для связи
+Документация: Wiki проекта
+Поддержка: Открывайте issues на GitHub для получения помощи
+Контакты: Пишите на email your.email@example.com для связи с разработчиками
